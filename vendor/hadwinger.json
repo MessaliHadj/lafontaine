@@ -1,0 +1,9 @@
+{
+  "name": "lafontn",
+  "stack": "SERN",
+  "variant": "JavaScript",
+  "simpleApp": true,
+  "npmRunAll": true,
+  "docker": true,
+  "dockerCompose": true
+}
