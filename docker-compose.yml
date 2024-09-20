@@ -18,7 +18,7 @@ services:
       context: ./hwg-lafontn/nginx
     container_name: server-lafontn
     ports:
-      - "3006:80"
+      - "3007:80"
     volumes:
       - ./hwg-lafontn/nginx/default.conf:/etc/nginx/conf.d/default.conf
   api:
