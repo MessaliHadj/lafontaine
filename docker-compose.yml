@@ -7,7 +7,7 @@ services:
       MYSQL_DATABASE: hwg_lafontn
     container_name: lafontn-bdd
     ports:
-      - '3306:3306'
+      - '3307:3306'
   nginx:
     depends_on:
       - api
@@ -18,7 +18,7 @@ services:
       context: ./hwg-lafontn/nginx
     container_name: server-lafontn
     ports:
-      - "3007:80"
+      - "3006:80"
     volumes:
       - ./hwg-lafontn/nginx/default.conf:/etc/nginx/conf.d/default.conf
   api:
