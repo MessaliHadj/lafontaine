@@ -1,6 +1,10 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
+import mySqlLogo from './assets/mySql.svg'
+import expressLogo from './assets/express.svg'
+import nodeLogo from './assets/node.svg'
 import viteLogo from '/vite.svg'
+import hwgLogo from '/hwg.svg'
 import './App.css'
 
 function App() {
@@ -10,10 +14,24 @@ function App() {
     <>
       <div>
         <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
+          <img src={viteLogo} className="logo vite" alt="Vite logo" />
+        </a>
+        <a href="https://hadwinger.dev" target="_blank">
+          <img src={hwgLogo} className="logo hadwinger" alt="Hadwinger logo" />
+        </a>
+      </div>
+      <div>
+        <a href="https://mysql.com/" target="_blank">
+          <img src={mySqlLogo} className="logo mysql" alt="MySql logo" />
+        </a>
+        <a href="https://expressjs.com/" target="_blank">
+          <img src={expressLogo} className="logo express" alt="ExpressJs logo" />
         </a>
         <a href="https://react.dev" target="_blank">
           <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+        <a href="https://nodejs.org" target="_blank">
+          <img src={nodeLogo} className="logo node" alt="NodeJs logo" />
         </a>
       </div>
       <h1>La Font'N</h1>
