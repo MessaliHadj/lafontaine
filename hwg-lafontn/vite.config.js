@@ -19,4 +19,9 @@ export default defineConfig({
     port: 3001,
     strictPort: true
   },
+  resolve: {
+    alias: {
+      '@': '/src'   
+    }
+  }
 })
