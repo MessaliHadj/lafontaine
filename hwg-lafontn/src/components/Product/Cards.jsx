@@ -5,7 +5,7 @@ import { Col, Card } from 'react-bootstrap'
 const Cards = ({data}) => {
   const {id, image, title, paragraph, rating, price} = data;
   const fullStars = Math.floor(rating);
-  const halfStar = rating - fullStars >= 0;
+  const halfStar = rating - fullStars >= 1;
   const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
   const [heart, setHeart] = useState(false);
 
@@ -21,7 +21,8 @@ const Cards = ({data}) => {
         </div>
         <Card.Body>
           <div className='d-flex align-items-center justify-content-between' style={{height: '30px'}}>
-            <div className="item_rating">   
+            <div className="item_rating"> 
+              <span>{JSON.stringify(rating).replace('.',',')}  </span>  
               {Array.from({ length: fullStars }).map((_, index) => (
                 <i key={index} className="text-warning bi bi-star-fill" ></i>
               ))}
