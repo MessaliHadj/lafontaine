@@ -47,7 +47,7 @@ const Section2 = () => {
                     <div className="about_icon">
                       <img src={cardData.image} className="img-fluid" alt="icon" />
                     </div>
-                    <h4>{cardData.title}</h4>
+                    <h3>{cardData.title}</h3>
                     <p>{cardData.paragraph}</p>
                   </div>
                 </Col>
