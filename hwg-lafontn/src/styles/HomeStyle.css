@@ -70,6 +70,8 @@
   padding-bottom: 30px;
 }
 .about_box .about_icon img {
+  width: 89px;
+  height: 89px;
   max-width: 25%;
 }
 .about_box h3 {
@@ -122,7 +124,7 @@
   padding: 7px 12px;
   border-radius: 4px;
 }
-.menu_section .menu_price h5 {
+.menu_section .menu_price h3 {
   color: var(--yellow);
   font-size: 1rem;
 }
@@ -201,12 +203,12 @@
   padding: 100px 0 0;
   background: var(--yellow);
 }
-.shop_section h4 {
+.shop_section h2 {
   font-size: 2.375rem;
   font-weight: 400;
   color: var(--bg-coffee);
 }
-.shop_section h2 {
+.shop_section h3 {
   font-size: 4.5rem;
   font-weight: 700;
   letter-spacing: -1px;
@@ -225,9 +227,15 @@
 }
 .shop_section .store {
   max-width: 40%;
+  width: 219px;
+  height: 68px;
 }
 .shop_section .e_shop {
   text-align: center;
+}
+.shop_section .e_shop img {
+  height: 504px;
+  width: 546px;
 }
 .brand_section {
   padding: 70px 0 40px;
@@ -235,8 +243,8 @@
 }
 .brand_section .brand_img img {
   width: 180px;
+  height: 180px;
   min-width: 150px;
-  height: auto;
 }
 
 @media (max-width: 1200px) {
@@ -276,10 +284,10 @@
   .menu_section .paragraph {
     padding: 10px 0px;
   }
-  .shop_section h4 {
+  .shop_section h2 {
     font-size: 1.8rem;
   }
-  .shop_section h2 {
+  .shop_section h3 {
     font-size: 3.75rem;
   }
   .brand_section {

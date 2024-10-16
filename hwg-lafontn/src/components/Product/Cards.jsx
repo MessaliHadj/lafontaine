@@ -39,7 +39,7 @@ const Cards = ({data}) => {
           <Card.Text>{paragraph}</Card.Text>
           <div className='d-flex align-items-center justify-content-between'>
             <div className="menu_price">
-              <h5 className='mb-0'>{price.toFixed(2)}€</h5>
+              <h3 className='mb-0'>{price.toFixed(2)}€</h3>
             </div>
             <div className="add_to_cart">
               <Link to='/'>

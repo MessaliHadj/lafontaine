@@ -35,7 +35,8 @@ header .navbar.sticky {
 }
 
 header .logo img {
-  width: auto;
+  width: 150px;
+  height: 64px;
   max-width: inherit;
   max-height: 80px;
 }

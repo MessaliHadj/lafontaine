@@ -1,6 +1,6 @@
 version: '3.9'
 services:
-  postgres:
+  mysql:
     image: 'mysql:latest'
     environment:
       MYSQL_ROOT_PASSWORD: root
