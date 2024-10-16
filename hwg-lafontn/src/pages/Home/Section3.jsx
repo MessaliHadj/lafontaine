@@ -1,7 +1,10 @@
 import { Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import Card from "@/components/Product/Card"
-import Image1 from "@/assets/tet.png"
+import Cards from "@/components/Product/Cards"
+import Image1 from "@/assets/burger-5.png"
+import Image2 from "@/assets/burger-3.jpg"
+import Image3 from "@/assets/burger-4.jpg"
+import Image4 from "@/assets/burger-2.jpg"
 
 const mockData = [
   {
@@ -43,14 +46,34 @@ const Section3 = () => {
     <section className='menu_section'>
       <Container>
         <Row>
-          <Col lg={{span: 8, offset:2}}>
+          <Col lg={{span: 8, offset:2}} className='text-center mb-5'>
            <h2>Les Burgers Star</h2>
-           <p>Oubliez les burgers classiques ! Laissez-vous tenter par nos créations originales et audacieuses. Découvrez nos burgers signatures, une explosion de goûts qui vous fera voyager à chaque bouchée.</p>
+           <p className='paragraph'>Oubliez les burgers classiques ! Laissez-vous tenter par nos créations originales et audacieuses. Découvrez nos burgers signatures, une explosion de goûts qui vous fera voyager à chaque bouchée.</p>
           </Col>
         </Row>
         <Row>{mockData.map((cardData, index)=>(
-          <Card key={index} data={cardData} />
+          <Cards key={index} data={cardData} />
         ))}</Row>
+        <Row className='pt-5'>
+          <Col sm={6} lg={5} >
+            <div className="ads_box ads_img1 mb-5 mb-md-0">
+              <h4>Avec tout nos burgers</h4>
+              <h5>Frites Maison</h5>
+              <Link to='/' className='btn btn-red px-4 rounded-0'>
+                En savoir plus
+              </Link>
+            </div>
+          </Col>
+          <Col sm={6} lg={7} >
+            <div className="ads_box ads_img2">
+              <h4>Avec tout nos burgers</h4>
+              <h5>Frites Maison</h5>
+              <Link to='/' className='btn btn-red px-4 rounded-0'>
+                En savoir plus
+              </Link>
+            </div>
+          </Col>
+        </Row>
       </Container>
     </section>
   )

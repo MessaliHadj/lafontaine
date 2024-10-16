@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="text-center text-lg-start bg-light text-muted mt-3">
+    <footer className="text-center text-lg-start bg-light text-muted">
       <div className="text-center p-4" style={{backgroundColor:"rgba(0, 0, 0, 0.05)"}}>
         © {new Date().getFullYear()} Copyright: &nbsp;
         <Link className="text-reset fw-bold" href="https://www.lafontn.fr">lafontn.fr</Link>
