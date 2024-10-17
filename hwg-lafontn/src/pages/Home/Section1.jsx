@@ -1,4 +1,5 @@
 import Croger from '@/assets/croger.png'
+import CrogerLarge from '@/assets/croger-large.png'
 import { Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
@@ -9,7 +10,10 @@ const Section1 = () => {
         <Row>
           <Col lg={7} className="mb-5 mb-lg-0">
             <div className="position-relative">
-              <img src={Croger} className="img-fluid" alt="image du croger" />
+              <img src={Croger} 
+              srcSet={`${CrogerLarge} 1200w`}
+              className="img-fluid" 
+              alt="image du croger" />
               <div className="price_badge">
                 <div className="badge_text">
                   <h4 className="h4-xs">Seulement</h4>
