@@ -36,16 +36,16 @@ const Section5 = () => {
         <Container>
           <Row className='justify-content-between'>
             <Col className='mb-4 col-xl-3 col-lg-4 col-sm-6 mt-2 text-center brand_img'>
-              <img src={UberEats} alt="UberEats" className='img-fluid' />
+              <img src={UberEats} alt="UberEats" className='img-fluid ratio ratio-1x1' />
             </Col>
             <Col className='mb-4 col-xl-3 col-lg-4 col-sm-6 mt-2 text-center brand_img'>
-              <img src={Deliveroo} alt="Deliveroo" className='img-fluid' />
+              <img src={Deliveroo} alt="Deliveroo" className='img-fluid ratio ratio-1x1' />
             </Col>
             <Col className='mb-4 col-xl-3 col-lg-4 col-sm-6 mt-2 text-center brand_img'>
-              <img src={JustEat} alt="JustEat" className='img-fluid' />
+              <img src={JustEat} alt="JustEat" className='img-fluid ratio ratio-1x1' />
             </Col>
             <Col className='mb-4 col-xl-3 col-lg-4 col-sm-6 mt-2 text-center brand_img'>
-              <img src={TooGoodToGo} alt="TooGoodToGo" className='img-fluid' />
+              <img src={TooGoodToGo} alt="TooGoodToGo" className='img-fluid ratio ratio-1x1' />
             </Col>
           </Row>
         </Container>

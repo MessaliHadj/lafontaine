@@ -6,6 +6,9 @@
   padding-top: 170px;
   padding-bottom: 90px;
 }
+.hero_section .img_croger {
+  width: 100%;
+}
 .hero_section .price_badge{
   background: url("@/assets/price-badge-yellow.png") no-repeat center center;
   background-size: cover;
@@ -70,8 +73,8 @@
   padding-bottom: 30px;
 }
 .about_box .about_icon img {
-  width: 89px;
-  height: 89px;
+  width: 71px;
+  height: 71px;
   max-width: 25%;
 }
 .about_box h3 {
@@ -177,10 +180,17 @@
   margin-top: 15px;
   font-size: 18px;
 }
+.menu_section .item_rating i {
+  margin-right: 5px;
+}
 .promotion_section {
   padding-top: 60px;
   padding-bottom: 60px;
   background: var(--light-grey);
+}
+.promotion_section img{
+  width: 546px;
+  height: 644px;
 }
 .promotion_section h2 {
   font-size: 3.25rem;
@@ -235,21 +245,104 @@
 }
 .shop_section .e_shop img {
   height: 504px;
-  width: 546px;
+  width: 570px;
 }
 .brand_section {
   padding: 70px 0 40px;
   background: var(--light-grey);
 }
 .brand_section .brand_img img {
-  width: 180px;
-  height: 180px;
-  min-width: 150px;
+  width: 150px;
+  height: 150px;
+  min-width: 90px;
+  min-height: 90px;
+  max-width: 180px;
+  max-height: 180px;
 }
+.review_section {
+  padding: 20px 0 10px;
+  background: url('@/assets/reviews.webp') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+  color: var(--light-grey);
+  overflow: hidden;
+}
+.review_section .mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.75);
+}
+.review_section .content {
+  min-height: 100vh;
+}
+.review_section img {
+  max-width: 150px;
+}
+.review_section p {
+  max-width: 80%;
+  font-size: 1.7rem;
+  line-height: 1.45;
+  font-weight: 400;
+  margin-bottom: 25px;
+}
+.review_section i {
+  color: var(--yellow);
+  margin-right: 5px;
+}
+.review_section h3 {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+.contact_section {
+  background: url('@/assets/baniere1.jpg') no-repeat center center;
+  background-size: cover;
+}
+.contact_section h2 {
+  font-size: 2.375rem;
+  font-weight: 500;
+  margin-bottom: 15px;
+  color: var(--yellow);
+  text-shadow: 2px 2px 7px black;
+}
+.contact_section h3 {
+  font-size: 3.2rem;
+  margin-bottom: 25px;
+  -webkit-text-stroke: 0.5px var(--yellow);
+}
+.contact_section p {
+  width: 70%;
+  margin: 0 auto 30px;
+  padding: 20px;
+  border-radius: 5px;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  border-left: 1px solid rgba(255, 255, 255, 0.25);
+}
+.contact_section .btn-red {
+  transition: 0s;
+}
+.contact_section .btn-red:hover {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+}
+
 
 @media (max-width: 1200px) {
   .promotion_section h2 {
     font-size: 2.25rem;
+  }
+  .contact_section h3 {
+    font-size: 3.5rem;
+  }
+  .contact_section p {
+    width: 95%;
   }
 }
 
@@ -284,17 +377,29 @@
   .menu_section .paragraph {
     padding: 10px 0px;
   }
+  .promotion_section img{
+    width: 314px;
+    height: 370px;
+  }
   .shop_section h2 {
     font-size: 1.8rem;
   }
   .shop_section h3 {
     font-size: 3.75rem;
   }
+  .shop_section .store{
+    width: 157px;
+    height: 49px;
+  }
+  .shop_section .e_shop img{
+    width: 314px;
+    height: 290px;
+  }
   .brand_section {
     padding: 50px 0 10px;
   }
   .brand_section .brand_img {
-    width: 150px;
+    width: 100%;
     height: auto;
   }
 }

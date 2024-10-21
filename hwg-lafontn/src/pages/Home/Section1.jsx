@@ -12,7 +12,7 @@ const Section1 = () => {
             <div className="position-relative">
               <img src={Croger} 
               srcSet={`${CrogerLarge} 1200w`}
-              className="img-fluid" 
+              className="img-fluid img_croger" 
               alt="image du croger" />
               <div className="price_badge">
                 <div className="badge_text">
