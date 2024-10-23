@@ -392,7 +392,7 @@
   }
   .shop_section .store{
     width: 157px;
-    height: 49px;
+    height: auto;
   }
   .shop_section .e_shop img{
     width: 314px;

@@ -1,22 +1,29 @@
-header .navbar {
+/* header .navbar {
   position: absolute;
   width: 100%;
   background-color: transparent;
   z-index: 5;
+} */
+header .navbar.sticky:hover,
+header .navbar.sticky.active {
+  top: 0;
 }
 header .navbar.sticky {
   position: fixed;
   left: 0;
-  top: 0;
-  background-color: var(--white);
+  top: -60px;
+  background-color: rgba(255, 255, 255, .5);
+  backdrop-filter: blur(5px);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
   box-shadow: 0 2px 3px rgba(96, 96, 96, 0.1);
   -webkit-box-shadow: 0 2px 3px rgba(96, 96, 96, 0.1);
   -moz-box-shadow: 0 2px 3px rgba(96, 96, 96, 0.1);
-  -webkit-transition: all 15ms ease-in-out;
-  -moz-transition: all 15ms ease-in-out;
-  -o-transition: all 15ms ease-in-out;
-  -ms-transition: all 15ms ease-in-out;
-  transition: all 15ms ease-in-out;
+  -webkit-transition: all 500ms ease-in-out;
+  -moz-transition: all 500ms ease-in-out;
+  -o-transition: all 500ms ease-in-out;
+  -ms-transition: all 500ms ease-in-out;
+  transition: all 500ms ease-in-out;
   animation: stickyTransition 0.5s both;
   -webkit-animation: stickyTransition 0.5s both;
 }
@@ -35,8 +42,8 @@ header .navbar.sticky {
 }
 
 header .logo img {
-  width: 150px;
-  height: 64px;
+  width: 119px;
+  height: 50px;
   max-width: inherit;
   max-height: 80px;
 }
@@ -81,9 +88,6 @@ header .roundpoint {
 @media (max-width: 992px) {
   header .navbar {
     background: #fafafa;
-  }
-  header .scrollable-nav {
-    overflow-y: scroll;
   }
   header i,
   header .nav-link {

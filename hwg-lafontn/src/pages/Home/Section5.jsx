@@ -19,10 +19,10 @@ const Section5 = () => {
               <h3>économisez 15%</h3>
               <p>Profitez de 15% de réduction sur votre première commande via notre application mobile ! Commandez dès maintenant et savourez nos burgers de qualité directement chez vous.*</p>
               <Link to='/'>
-                <img src={AppStore} alt="IOS" className='img-fluid me-3 store'/>
+                <img src={AppStore} alt="IOS" className='img-fluid me-2 me-lg-3 store'/>
               </Link>
               <Link to='/'>
-                <img src={GooglePlay} alt="IOS" className='img-fluid me-3 store'/>
+                <img src={GooglePlay} alt="IOS" className='img-fluid ms-2 me-lg-3 store'/>
               </Link>
               <p className='conditions'>*Conditions de l'offre : Valable une seule fois par client et par adresse. Non cumulable avec d'autres promotions en cours. Valable uniquement sur la première commande. Zone de livraison limitée.</p>
             </Col>

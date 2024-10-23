@@ -1,29 +1,39 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "@/styles/HeaderStyle.css";
 import {Container,Navbar, Nav, Badge } from 'react-bootstrap';
 import Logo from "@/assets/logo.png";
 
 const Header = () => {
-  const [nav, setNav] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);
+  const [showScrollToTop, setShowScrollToTop] = useState(false);
 
-  const changeValueOnScroll = () => {
-    const scrollValue = document?.documentElement?.scrollTop;
-    scrollValue > 200 ? setNav(true) : setNav(false);
-  }
+  useEffect(() => {
+    let prevScrollPos = window.scrollY;
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      setIsSticky(scrollTop > 200);
+      setShowScrollToTop(scrollTop < 825 || prevScrollPos > scrollTop);
+      prevScrollPos = prevScrollPos = scrollTop;
+    };
 
-  window.addEventListener("scroll", changeValueOnScroll)
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const className = `navbar ${isSticky ? 'sticky' : ''} ${showScrollToTop ? 'active' : ''}`;
 
   return (
     <header>
-      <Navbar collapseOnSelect fixed="top" expand="lg" className={`${nav && "sticky"}`} >
+      <Navbar collapseOnSelect fixed="top" expand="lg" className={className} >
         <Container>
           <Navbar.Brand as={Link} to="/" className="logo">
             <img src={Logo} alt="logo de la Font'n" className="img-fluid" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
-            <Nav className="ms-auto scrollable-nav">
+            <Nav className="ms-auto" navbarScroll>
               <Nav.Link as={Link} to="/">Accueil</Nav.Link>
               <Nav.Link as={Link} to="/menu">La Carte</Nav.Link>
               <Nav.Link as={Link} to="/contact">Nous Contacter</Nav.Link>
