@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from 'react-bootstrap'
+import Tiktok from '@/assets/tiktok.png'
+import Instagram from '@/assets/instagram.png'
+import Youtube from '@/assets/youtube.png'
 
 const Footer = () => {
   return (
@@ -41,14 +44,14 @@ const Footer = () => {
                   suivez nous
                 </h3>
                 <span>
-                  <Link to="/" aria-label="tiktok" className="text-reset mx-2">
-                    <i className="bi bi-tiktok"></i>
+                  <Link to="/" aria-label="tiktok" className="mx-3">
+                    <img src={Tiktok} alt="logo de TikTok" />
                   </Link>
-                  <Link to="/" aria-label="instagram" className="text-reset mx-2">
-                    <i className="bi bi-instagram"></i>
+                  <Link to="/" aria-label="instagram" className="mx-3">
+                    <img src={Instagram} alt="logo d'instagram" />
                   </Link>
-                  <Link to="/" aria-label="youtube" className="text-reset mx-2">
-                    <i className="bi bi-youtube"></i>
+                  <Link to="/" aria-label="youtube" className="mx-3">
+                    <img src={Youtube} alt="logo de YouTube" />
                   </Link>
                 </span>
               </div>            

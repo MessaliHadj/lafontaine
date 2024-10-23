@@ -82,6 +82,9 @@ header .roundpoint {
   header .navbar {
     background: #fafafa;
   }
+  header .scrollable-nav {
+    overflow-y: scroll;
+  }
   header i,
   header .nav-link {
     font-size: 2rem;

@@ -356,6 +356,9 @@
   .about_box p {
     padding: 0;
   }
+  .shop_section p {
+    padding: 0;
+  }
   .bg_parallax_scroll {
     background-attachment: scroll;
     height: 500px;

@@ -16,20 +16,19 @@ const Header = () => {
 
   return (
     <header>
-      <Navbar collapseOnSelect expand="lg" className={`${nav && "sticky"}`} >
+      <Navbar collapseOnSelect fixed="top" expand="lg" className={`${nav && "sticky"}`} >
         <Container>
           <Navbar.Brand as={Link} to="/" className="logo">
             <img src={Logo} alt="logo de la Font'n" className="img-fluid" />
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ms-auto">
+          <Navbar.Toggle aria-controls="navbarScroll" />
+          <Navbar.Collapse id="navbarScroll">
+            <Nav className="ms-auto scrollable-nav">
               <Nav.Link as={Link} to="/">Accueil</Nav.Link>
               <Nav.Link as={Link} to="/menu">La Carte</Nav.Link>
-              <Nav.Link as={Link} to="/shop">La Boutique</Nav.Link>
-              <Nav.Link as={Link} to="/about">À Propos</Nav.Link>
               <Nav.Link as={Link} to="/contact">Nous Contacter</Nav.Link>
               <Nav.Link as={Link} to="/blog">Le Blog</Nav.Link>
+              <Nav.Link as={Link} to="/about">À Propos</Nav.Link>
               <Nav.Link as={Link} to="/cart">
                 <div className="cart">
                   <i className="bi bi-bag"></i>
