@@ -7,6 +7,8 @@ import Logo from "@/assets/logo.png";
 const Header = () => {
   const [isSticky, setIsSticky] = useState(false);
   const [showScrollToTop, setShowScrollToTop] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [prod, setProd] = useState(0);
 
   useEffect(() => {
     let prevScrollPos = window.scrollY;
@@ -28,21 +30,20 @@ const Header = () => {
     <header>
       <Navbar collapseOnSelect fixed="top" expand="lg" className={className} >
         <Container>
-          <Navbar.Brand as={Link} to="/" className="logo">
+          <Navbar.Brand onClick={() => setOpen(!open)} as={Link} to="/" className="logo">
             <img src={Logo} alt="logo de la Font'n" className="img-fluid" />
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="navbarScroll" />
-          <Navbar.Collapse id="navbarScroll">
+          <Navbar.Toggle onClick={() => setOpen(!open)} aria-controls="navbarScroll" aria-expanded={open} />
+          <Navbar.Collapse in={open} id="navbarScroll">
             <Nav className="ms-auto" navbarScroll>
-              <Nav.Link as={Link} to="/">Accueil</Nav.Link>
-              <Nav.Link as={Link} to="/menu">La Carte</Nav.Link>
-              <Nav.Link as={Link} to="/contact">Nous Contacter</Nav.Link>
-              <Nav.Link as={Link} to="/blog">Le Blog</Nav.Link>
-              <Nav.Link as={Link} to="/about">À Propos</Nav.Link>
-              <Nav.Link as={Link} to="/cart">
+              <Nav.Link onClick={() => setOpen(!open)} as={Link} to="/">Accueil</Nav.Link>
+              <Nav.Link onClick={() => setOpen(!open)} as={Link} to="/menu">La Carte</Nav.Link>
+              <Nav.Link onClick={() => setOpen(!open)} as={Link} to="/contact">Nous Contacter</Nav.Link>
+              <Nav.Link onClick={() => setOpen(!open)} as={Link} to="/about">À Propos</Nav.Link>
+              <Nav.Link onClick={() => setOpen(!open)} as={Link} to="/cart">
                 <div className="cart">
                   <i className="bi bi-bag"></i>
-                  <Badge pill bg="success" className="roundpoint">2</Badge>
+                  <Badge pill bg="success" className={`roundpoint ${prod > 9 ? 'sup' : ''}`} >{prod}</Badge>
                 </div>
               </Nav.Link>
             </Nav>

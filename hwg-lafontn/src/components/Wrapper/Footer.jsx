@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "@/styles/FooterStyle.css";
 import { Container, Row, Col } from 'react-bootstrap'
 import Tiktok from '@/assets/tiktok.png'
 import Instagram from '@/assets/instagram.png'

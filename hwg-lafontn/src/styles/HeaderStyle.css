@@ -1,9 +1,12 @@
-/* header .navbar {
-  position: absolute;
-  width: 100%;
-  background-color: transparent;
-  z-index: 5;
-} */
+header .navbar {
+  background-color: rgba(255, 255, 255, .5);
+  backdrop-filter: blur(5px);
+  -webkit-transition: all 500ms ease-in-out;
+  -moz-transition: all 500ms ease-in-out;
+  -o-transition: all 500ms ease-in-out;
+  -ms-transition: all 500ms ease-in-out;
+  transition: all 500ms ease-in-out;
+}
 header .navbar.sticky:hover,
 header .navbar.sticky.active {
   top: 0;
@@ -12,8 +15,6 @@ header .navbar.sticky {
   position: fixed;
   left: 0;
   top: -60px;
-  background-color: rgba(255, 255, 255, .5);
-  backdrop-filter: blur(5px);
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   box-shadow: 0 2px 3px rgba(96, 96, 96, 0.1);
@@ -24,23 +25,7 @@ header .navbar.sticky {
   -o-transition: all 500ms ease-in-out;
   -ms-transition: all 500ms ease-in-out;
   transition: all 500ms ease-in-out;
-  animation: stickyTransition 0.5s both;
-  -webkit-animation: stickyTransition 0.5s both;
 }
-
-@keyframes stickyTransition {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-  }
-  to {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
-}
-
 header .logo img {
   width: 119px;
   height: 50px;
@@ -84,11 +69,11 @@ header .roundpoint {
   top: 0.2px;
   right: -10px;
 }
+header .roundpoint.sup {
+  padding: 0.35em 0;
+}
 
 @media (max-width: 992px) {
-  header .navbar {
-    background: #fafafa;
-  }
   header i,
   header .nav-link {
     font-size: 2rem;
