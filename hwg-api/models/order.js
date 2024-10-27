@@ -1,42 +1,44 @@
-const { DataTypes, Enum } = require('sequelize')
+const { DataTypes, ENUM } = require('sequelize')
+const OrderProduct = require('./order.product');
 const DB = require('../db.config')
 
-const Oder = DB.define('Oder', {
+const Order = DB.define('Order', {
   id: {
     type: DataTypes.INTEGER(10),
     primaryKey: true,
     autoIncrement: true
   },
-  user_id: {
+  userId: {
     type: DataTypes.INTEGER(10),
-    allowNull: false
+    allowNull: false,
+    references: {
+      model: 'Users',
+      key: 'id'
+    }
   },
   status: {
-    type: Enum(['in progress', 'ready', 'recovered']),
+    type: ENUM(['in progress', 'ready', 'recovered', 'cancelled']),
     defaultValue: 'in progress',
     allowNull: false
   },
   total: {
     type: DataTypes.FLOAT,
-    allowNull: false
-  },
-  createdAt: {
-    type: DataTypes.DATE,
-    defaultValue: Sequelize.NOW
-  },
-  updatedAt: {
-    type: DataTypes.DATE,
-    defaultValue: Sequelize.NOW
+    allowNull: false,
+    defaultValue: 0
   }
 }, {
   paranoid: true,
   hooks: {
-    beforeCreate: (order) => {
-      order.total = order.Products.reduce((total, product) => {
-        return total + product.price * product.OrderProduct.quantity;
-      }, 0);
+    beforeCreate: async (order) => {
+      const orderProducts = await OrderProduct.findAll({ where: { orderId: order.id } });
+      
+      order.total = orderProducts.reduce((acc, orderProduct) => acc + orderProduct.prix_total, 0);
+    },
+    beforeUpdate: async (order) => {
+      const orderProducts = await OrderProduct.findAll({ where: { orderId: order.id } });
+      order.total = orderProducts.reduce((acc, orderProduct) => acc + orderProduct.prix_total, 0);
     }
   }
 })
 
-module.exports = Oder
+module.exports = Order

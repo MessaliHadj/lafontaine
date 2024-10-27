@@ -1,37 +1,41 @@
 const express = require('express')
+const { Op } = require("sequelize");
 const validator = require('validator')
 const User = require('../models/user')
+const bcrypt = require('bcrypt')
 let router = express.Router()
 
-router.get('', (req, res)=> {
-  User.findAll()
-    .then( users => res.json({ data: users }) )
+router.get('/user', (req, res)=> {
+  User.findAll({attributes: { exclude: ['password'] }, raw: true})
+    .then( users => res.json({data: users}) )
     .catch( err => res.status(500).json({ message: 'Database Error', error: err}))
 })
 
-router.get('/:id', (req, res)=> {
+router.get('/user/:id', (req, res)=> {
   let userId = parseInt(req.params.id)
 
   if(!userId) return res.status(400).json({ message: 'Missing paramater' })
 
-  User.findOne({ where: {id: userId}, raw: true })
+  User.findOne({ where: {id: userId}, attributes: { exclude: ['password'] }, raw: true })
     .then( user => {
       return !user ? res.status(404).json({ message: 'This user does not exist !' }) : res.json({ data: user }) 
     })
     .catch( err => res.status(500).json({ message: 'Database Error', error: err}))
 })
 
-router.put('', async (req, res) => {
+router.put('/user', async (req, res) => {
   const { lastname, firstname, email, phone_number, password } = req.body;
-  if(!lastname || !firstname || !email || !phone_number || !password) return res.status(400).json({ message: 'Missing data' })
+  if (!lastname || !firstname || !email || !phone_number || !password) {
+    return res.status(400).json({ message: 'Missing data' });
+  }
 
   const newUser = { lastname, firstname, email, phone_number, password };
   try {
-    const user = await User.findOne({ where: { $or: [{ email }, { phone_number }] } });
+    const user = await User.findOne({ where: { [Op.or]: [{ email }, { phone_number }] } });
     if (user) return res.status(400).json({ message: 'This email or phone number already exists' })
 
     const createdUser = await User.create(newUser);
-    res.json({ message: 'User successfully created', data: createdUser });
+    res.json({ message: 'User successfully created', data: createdUser })
   } catch (err) {
     res.status(500).json({ message: 'Database Error', error: err });
   }
@@ -49,8 +53,9 @@ router.post('/login', async (req, res) => {
 
   try {
     const user = await User.findOne({ where: { identifier } });
+    const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
 
-    if (!user || !bcrypt.compareSync(password, user.passwordHash)) {
+    if (!user || !isPasswordValid) {
       return res.status(401).json({ message: 'Invalid identifier or password' });
     }
 
@@ -59,3 +64,64 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ message: 'Database Error', error: err });
   }
 });
+
+router.patch('/user/:id', async (req, res) => {
+  const userId = parseInt(req.params.id);
+
+  if (!userId) return res.status(400).json({ message: 'Missing parameter' });
+
+  try {
+    const user = await User.findOne({ where: { id: userId } });
+    if (!user) return res.status(404).json({ message: 'This user does not exist!' });
+
+    await User.update(req.body, { where: { id: userId } });
+
+    const updatedUser = await User.findOne({ where: { id: userId }, raw: true });
+
+    res.json({ message: 'User successfully updated', data: updatedUser });
+  } catch (err) {
+    res.status(500).json({ message: 'Database Error', error: err });
+  }
+});
+
+
+router.post('/user/untrash/:id', (req, res)=> {
+  let userId = parseInt(req.params.id)
+
+  if(!userId) return res.status(400).json({ message: 'Missing paramater' })
+
+  User.restore({ where: {id: userId} })
+    .then( user => {
+      return !user ? res.status(404).json({ message: 'This user does not exist !' }) : 
+      res.status(204).json({}) 
+    })
+    .catch( err => res.status(500).json({ message: 'Database Error', error: err}))
+})
+
+router.delete('/user/trash/:id', (req, res)=> {
+  let userId = parseInt(req.params.id)
+
+  if(!userId) return res.status(400).json({ message: 'Missing paramater' })
+
+  User.destroy({ where: {id: userId} })
+    .then( user => {
+      return !user ? res.status(404).json({ message: 'This user does not exist !' }) : 
+      res.status(204).json({}) 
+    })
+    .catch( err => res.status(500).json({ message: 'Database Error', error: err}))
+})
+
+router.delete('/user/:id', (req, res)=> {
+  let userId = parseInt(req.params.id)
+
+  if(!userId) return res.status(400).json({ message: 'Missing paramater' })
+
+  User.destroy({ where: {id: userId}, force: true })
+    .then( user => {
+      return !user ? res.status(404).json({ message: 'This user does not exist !' }) : 
+      res.status(204).json({}) 
+    })
+    .catch( err => res.status(500).json({ message: 'Database Error', error: err}))
+})
+
+module.exports = router

@@ -1,4 +1,4 @@
-const { DataTypes, Enum } = require('sequelize')
+const { DataTypes, ENUM } = require('sequelize')
 const bcrypt = require('bcrypt')
 const DB = require('../db.config')
 
@@ -17,7 +17,7 @@ const User = DB.define('User', {
     allowNull: false
   },
   role: {
-    type: Enum(['user', 'admin', 'manager']),
+    type: ENUM(['user', 'manager', 'admin']),
     defaultValue: 'user',
     allowNull: false
   },
@@ -40,7 +40,7 @@ const User = DB.define('User', {
     set(value) {
       const salt = bcrypt.genSaltSync();
       const hash = bcrypt.hashSync(value, salt);
-      this.setDataValue('passwordHash', hash);
+      this.setDataValue('password', hash);
     }
   }
 }, {paranoid: true})

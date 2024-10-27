@@ -1,4 +1,5 @@
-const { DataTypes, Enum } = require('sequelize')
+const { DataTypes } = require('sequelize')
+const Family = require('./family')
 const DB = require('../db.config')
 
 const Product = DB.define('Product', {
@@ -11,28 +12,27 @@ const Product = DB.define('Product', {
     type: DataTypes.STRING(100),
     allowNull: false
   },
-  firstname: {
-    type: DataTypes.STRING(100),
-    allowNull: false
-  },
-  role: {
-    type: Enum(['Product', 'admin', 'manager']),
-    defaultValue: 'Product',
-    allowNull: false
-  },
-  email: {
-    type: DataTypes.STRING,
+  familyId: {
+    type: DataTypes.INTEGER,
     allowNull: false,
-    unique: true,
-    validate: {
-      isEmail: true
+    references: {
+      model: Family,
+      key: 'id'
     }
   },
-  phone_number: {
-    type: DataTypes.STRING,
+  description: {
+    type: DataTypes.STRING(100),
+    defaultValue: '',
+    allowNull: true
+  },
+  price: {
+    type: DataTypes.FLOAT,
     allowNull: false,
-    unique: true
+    defaultValue: 0
   },
 }, {paranoid: true})
+
+Product.belongsTo(Family, { foreignKey: 'familyId' });
+Family.hasMany(Product, { foreignKey: 'familyId' });
 
 module.exports = Product

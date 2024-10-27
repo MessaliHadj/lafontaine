@@ -1,23 +1,37 @@
 const express = require('express');
 const cors = require('cors');
 const DB = require('./db.config')
-const bodyParser = require('body-parser');
-const mysql = require('mysql2/promise');
+const user_router = require('./routes/user')
+const family_router = require('./routes/family')
+const order_router = require('./routes/order')
+const product_router = require('./routes/product')
+const menu_router = require('./routes/menu')
 
 const app = express();
 const port = process.env.SERVER_PORT;
 
+const routers = [
+  user_router, 
+  family_router, 
+  order_router, 
+  product_router, 
+  menu_router
+]
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended : true}));
-app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
+app.get('/api/v1', (req, res) => {
   res.send('Hello world');
 });
 
+routers.forEach(router => {
+  app.use('/api/v1', router)
+});
+
 app.get('*', (req, res) => {
-  res.status(501).send('How can I help you ?');
+  res.status(404).send('Resource not found.');
 });
 
 DB.authenticate()

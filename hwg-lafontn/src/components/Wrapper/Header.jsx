@@ -8,7 +8,7 @@ const Header = () => {
   const [isSticky, setIsSticky] = useState(false);
   const [showScrollToTop, setShowScrollToTop] = useState(false);
   const [open, setOpen] = useState(false);
-  const [prod, setProd] = useState(0);
+  const [prodCount, setProdCount] = useState(0);
 
   useEffect(() => {
     let prevScrollPos = window.scrollY;
@@ -43,7 +43,7 @@ const Header = () => {
               <Nav.Link onClick={() => setOpen(!open)} as={Link} to="/cart">
                 <div className="cart">
                   <i className="bi bi-bag"></i>
-                  <Badge pill bg="success" className={`roundpoint ${prod > 9 ? 'sup' : ''}`} >{prod}</Badge>
+                  <Badge pill bg="success" className={`roundpoint ${prodCount > 9 ? 'sup' : ''}`} >{prodCount}</Badge>
                 </div>
               </Nav.Link>
             </Nav>

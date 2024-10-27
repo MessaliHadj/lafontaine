@@ -24,9 +24,9 @@ const Footer = () => {
                 <h3 className="text-uppercase fw-bold mb-4">
                   Commander
                 </h3>
-                <p>Commander via WhatsApp</p>
+                <p className="calling_sup_text">Commander via WhatsApp</p>
                 <address>
-                  <a href="whatsapp://send?phone=+33633270270" className="text-reset link-underline link-underline-opacity-0">
+                  <a href="whatsapp://send?phone=+33633270270" className="calling link-underline link-underline-opacity-0">
                   <i className="bi bi-telephone"></i> 06 33 270 270
                   </a>
                 </address>
