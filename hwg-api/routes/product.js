@@ -3,7 +3,7 @@ const Product = require('../models/product')
 const Family = require('../models/family')
 let router = express.Router()
 
-router.get('/product', (req, res)=> {
+router.get('', (req, res)=> {
   Product.findAll({
     include: [{ 
       model: Family, 
@@ -32,7 +32,7 @@ router.get('/product', (req, res)=> {
     .catch( err => res.status(500).json({ message: 'Database Error', error: err}))
 })
 
-router.get('/product/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   let productId = parseInt(req.params.id);
 
   if (!productId) return res.status(400).json({ message: 'Missing parameter' });
@@ -68,7 +68,7 @@ router.get('/product/:id', (req, res) => {
     .catch(err => res.status(500).json({ message: 'Database Error', error: err }));
 });
 
-router.put('/product', async (req, res) => {
+router.put('', async (req, res) => {
   const { name, familyId, description, price } = req.body;
   if (!name || !familyId || !price) return res.status(400).json({ message: 'Missing data' });
 
@@ -84,7 +84,7 @@ router.put('/product', async (req, res) => {
   }
 });
 
-router.patch('/product/:id', async (req, res) => {
+router.patch('/:id', async (req, res) => {
   const productId = parseInt(req.params.id);
 
   if (!productId) return res.status(400).json({ message: 'Missing parameter' });
@@ -104,7 +104,7 @@ router.patch('/product/:id', async (req, res) => {
 });
 
 
-router.post('/product/untrash/:id', (req, res)=> {
+router.post('/untrash/:id', (req, res)=> {
   let productId = parseInt(req.params.id)
 
   if(!productId) return res.status(400).json({ message: 'Missing paramater' })
@@ -117,7 +117,7 @@ router.post('/product/untrash/:id', (req, res)=> {
     .catch( err => res.status(500).json({ message: 'Database Error', error: err}))
 })
 
-router.delete('/product/trash/:id', (req, res) => {
+router.delete('/trash/:id', (req, res) => {
   let productId = parseInt(req.params.id);
 
   if (!productId) return res.status(400).json({ message: 'Missing parameter' });
@@ -130,7 +130,7 @@ router.delete('/product/trash/:id', (req, res) => {
     .catch(err => res.status(500).json({ message: 'Database Error', error: err }));
 });
 
-router.delete('/product/:id', (req, res)=> {
+router.delete('/:id', (req, res)=> {
   let productId = parseInt(req.params.id)
 
   if(!productId) return res.status(400).json({ message: 'Missing paramater' })

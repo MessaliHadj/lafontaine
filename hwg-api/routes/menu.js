@@ -2,13 +2,13 @@ const express = require('express')
 const Menu = require('../models/menu')
 let router = express.Router()
 
-router.get('/menu', (req, res)=> {
+router.get('', (req, res)=> {
   Menu.findAll({raw: true})
     .then( menu => res.json({data: menu}) )
     .catch( err => res.status(500).json({ message: 'Database Error', error: err}))
 })
 
-router.get('/menu/:id', (req, res)=> {
+router.get('/:id', (req, res)=> {
   let menuId = parseInt(req.params.id)
 
   if(!menuId) return res.status(400).json({ message: 'Missing paramater' })
@@ -20,7 +20,7 @@ router.get('/menu/:id', (req, res)=> {
     .catch( err => res.status(500).json({ message: 'Database Error', error: err}))
 })
 
-router.put('/menu', async (req, res) => {
+router.put('', async (req, res) => {
   const { name, description, price } = req.body;
   if (!name || !price) return res.status(400).json({ message: 'Missing data' });
 
@@ -36,7 +36,7 @@ router.put('/menu', async (req, res) => {
   }
 });
 
-router.patch('/menu/:id', async (req, res) => {
+router.patch('/:id', async (req, res) => {
   const menuId = parseInt(req.params.id);
 
   if (!menuId) return res.status(400).json({ message: 'Missing parameter' });
@@ -56,7 +56,7 @@ router.patch('/menu/:id', async (req, res) => {
 });
 
 
-router.post('/menu/untrash/:id', (req, res)=> {
+router.post('/untrash/:id', (req, res)=> {
   let menuId = parseInt(req.params.id)
 
   if(!menuId) return res.status(400).json({ message: 'Missing paramater' })
@@ -69,7 +69,7 @@ router.post('/menu/untrash/:id', (req, res)=> {
     .catch( err => res.status(500).json({ message: 'Database Error', error: err}))
 })
 
-router.delete('/menu/trash/:id', (req, res) => {
+router.delete('/trash/:id', (req, res) => {
   let menuId = parseInt(req.params.id);
 
   if (!menuId) return res.status(400).json({ message: 'Missing parameter' });
@@ -82,7 +82,7 @@ router.delete('/menu/trash/:id', (req, res) => {
     .catch(err => res.status(500).json({ message: 'Database Error', error: err }));
 });
 
-router.delete('/menu/:id', (req, res)=> {
+router.delete('/:id', (req, res)=> {
   let menuId = parseInt(req.params.id)
 
   if(!menuId) return res.status(400).json({ message: 'Missing paramater' })

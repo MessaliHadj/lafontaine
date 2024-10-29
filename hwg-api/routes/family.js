@@ -2,13 +2,13 @@ const express = require('express')
 const Family = require('../models/family')
 let router = express.Router()
 
-router.get('/family', (req, res)=> {
+router.get('', (req, res)=> {
   Family.findAll({attributes: ['id', 'name'], raw: true})
     .then( families => res.json({data: families}) )
     .catch( err => res.status(500).json({ message: 'Database Error', error: err}))
 })
 
-router.get('/family/:id', (req, res)=> {
+router.get('/:id', (req, res)=> {
   let familyId = parseInt(req.params.id)
 
   if(!familyId) return res.status(400).json({ message: 'Missing paramater' })
@@ -20,7 +20,7 @@ router.get('/family/:id', (req, res)=> {
     .catch( err => res.status(500).json({ message: 'Database Error', error: err}))
 })
 
-router.put('/family', async (req, res) => {
+router.put('', async (req, res) => {
   const name = req.body.name;
   if (!name) return res.status(400).json({ message: 'Missing data' });
 
@@ -36,7 +36,7 @@ router.put('/family', async (req, res) => {
   }
 });
 
-router.patch('/family/:id', async (req, res) => {
+router.patch('/:id', async (req, res) => {
   const familyId = parseInt(req.params.id);
 
   if (!familyId) return res.status(400).json({ message: 'Missing parameter' });
@@ -56,7 +56,7 @@ router.patch('/family/:id', async (req, res) => {
 });
 
 
-router.post('/family/untrash/:id', (req, res)=> {
+router.post('/untrash/:id', (req, res)=> {
   let familyId = parseInt(req.params.id)
 
   if(!familyId) return res.status(400).json({ message: 'Missing paramater' })
@@ -69,7 +69,7 @@ router.post('/family/untrash/:id', (req, res)=> {
     .catch( err => res.status(500).json({ message: 'Database Error', error: err}))
 })
 
-router.delete('/family/trash/:id', (req, res) => {
+router.delete('/trash/:id', (req, res) => {
   let familyId = parseInt(req.params.id);
 
   if (!familyId) return res.status(400).json({ message: 'Missing parameter' });
@@ -82,7 +82,7 @@ router.delete('/family/trash/:id', (req, res) => {
     .catch(err => res.status(500).json({ message: 'Database Error', error: err }));
 });
 
-router.delete('/family/:id', (req, res)=> {
+router.delete('/:id', (req, res)=> {
   let familyId = parseInt(req.params.id)
 
   if(!familyId) return res.status(400).json({ message: 'Missing paramater' })

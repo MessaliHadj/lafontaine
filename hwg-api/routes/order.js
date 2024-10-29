@@ -3,13 +3,13 @@ const { Op } = require('sequelize')
 const Order = require('../models/order')
 let router = express.Router()
 
-router.get('/order', (req, res)=> {
+router.get('', (req, res)=> {
   Order.findAll({raw: true})
     .then( order => res.json({data: order}) )
     .catch( err => res.status(500).json({ message: 'Database Error', error: err}))
 })
 
-router.get('/order/:id', (req, res)=> {
+router.get('/:id', (req, res)=> {
   let orderId = parseInt(req.params.id)
 
   if(!orderId) return res.status(400).json({ message: 'Missing paramater' })
@@ -21,7 +21,7 @@ router.get('/order/:id', (req, res)=> {
     .catch( err => res.status(500).json({ message: 'Database Error', error: err}))
 })
 
-router.put('/order', async (req, res) => {
+router.put('', async (req, res) => {
   const userId = req.body.userId;
   if (!userId) return res.status(400).json({ message: 'Missing data' });
 
@@ -37,7 +37,7 @@ router.put('/order', async (req, res) => {
   }
 });
 
-router.patch('/order/:id', async (req, res) => {
+router.patch('/:id', async (req, res) => {
   const orderId = parseInt(req.params.id);
 
   if (!orderId) return res.status(400).json({ message: 'Missing parameter' });
@@ -57,7 +57,7 @@ router.patch('/order/:id', async (req, res) => {
 });
 
 
-router.post('/order/untrash/:id', (req, res)=> {
+router.post('/untrash/:id', (req, res)=> {
   let orderId = parseInt(req.params.id)
 
   if(!orderId) return res.status(400).json({ message: 'Missing paramater' })
@@ -70,7 +70,7 @@ router.post('/order/untrash/:id', (req, res)=> {
     .catch( err => res.status(500).json({ message: 'Database Error', error: err}))
 })
 
-router.delete('/order/trash/:id', (req, res) => {
+router.delete('/trash/:id', (req, res) => {
   let orderId = parseInt(req.params.id);
 
   if (!orderId) return res.status(400).json({ message: 'Missing parameter' });
@@ -83,7 +83,7 @@ router.delete('/order/trash/:id', (req, res) => {
     .catch(err => res.status(500).json({ message: 'Database Error', error: err }));
 });
 
-router.delete('/order/:id', (req, res)=> {
+router.delete('/:id', (req, res)=> {
   let orderId = parseInt(req.params.id)
 
   if(!orderId) return res.status(400).json({ message: 'Missing paramater' })
