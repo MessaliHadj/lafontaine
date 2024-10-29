@@ -3,8 +3,8 @@ services:
   mysql:
     image: 'mysql:latest'
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: hwg_lafontn
+      DB_PASSWORD: root
+      DB_DATABASE: hwg_lafontn
     container_name: lafontn-bdd
     ports:
       - '3307:3306'
