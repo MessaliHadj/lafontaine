@@ -5,11 +5,22 @@ let sequelize = new Sequelize(
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: 'mysql',
+    dialectOptions: {
+      connectTimeout: 60000,
+    },
+    retry: {
+      max: 5,
+      match: [
+        /EAI_AGAIN/, // Erreur de résolution DNS
+        /ETIMEDOUT/, // Erreur de délai d'attente
+        /ECONNREFUSED/ // Erreur de connexion refusée
+      ],
+    },
     logging: false
   }
 )
 
-sequelize.sync()
+sequelize.authenticate()
   .then(() => console.log('Database syncronized'))
   .catch(err => console.error('Database sync error:', err));
 
