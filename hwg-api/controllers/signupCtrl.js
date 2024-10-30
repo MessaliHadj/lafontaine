@@ -22,8 +22,6 @@ exports.setNewUser = async (req, res, next) => {
     if(user) 
       throw new UserError('This email or phone number already exists', 1);
 
-    newUser.password = await userService.hashPassword(password);
-
     const createdUser = await User.create(newUser)
 
     return res.status(201).json({
