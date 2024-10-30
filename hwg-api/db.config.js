@@ -20,7 +20,7 @@ let sequelize = new Sequelize(
   }
 )
 
-sequelize.authenticate()
+sequelize.sync()
   .then(() => console.log('Database syncronized'))
   .catch(err => console.error('Database sync error:', err));
 
