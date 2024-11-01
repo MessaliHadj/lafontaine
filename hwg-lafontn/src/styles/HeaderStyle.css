@@ -53,12 +53,16 @@ header .sticky .nav-link {
 header .nav-link:hover {
   color: #f7be27;
 }
-header .cart {
+header .cart,
+header .user {
   position: relative;
   top: -0.4375rem;
 }
-header i {
+header .cart i {
   font-size: 1.25rem;
+}
+header .user i {
+  font-size: 1.55rem;
 }
 header .roundpoint {
   width: 16px;

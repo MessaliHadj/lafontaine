@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { UserContext } from "@/components/Contexts/UserContext";
 import { Link } from "react-router-dom";
 import "@/styles/HeaderStyle.css";
 import {Container,Navbar, Nav, Badge } from 'react-bootstrap';
 import Logo from "@/assets/logo.png";
 
 const Header = () => {
+  const { user } = useContext(UserContext);
   const [isSticky, setIsSticky] = useState(false);
   const [showScrollToTop, setShowScrollToTop] = useState(false);
   const [open, setOpen] = useState(false);
@@ -40,12 +42,24 @@ const Header = () => {
               <Nav.Link onClick={() => setOpen(!open)} as={Link} to="/menu">La Carte</Nav.Link>
               <Nav.Link onClick={() => setOpen(!open)} as={Link} to="/contact">Nous Contacter</Nav.Link>
               <Nav.Link onClick={() => setOpen(!open)} as={Link} to="/about">À Propos</Nav.Link>
-              <Nav.Link onClick={() => setOpen(!open)} as={Link} to="/cart">
-                <div className="cart">
-                  <i className="bi bi-bag"></i>
-                  <Badge pill bg="success" className={`roundpoint ${prodCount > 9 ? 'sup' : ''}`} >{prodCount}</Badge>
-                </div>
-              </Nav.Link>
+              {
+                user ? 
+                (
+                  <Nav.Link onClick={() => setOpen(!open)} as={Link} to="/cart">
+                    <div className="cart">
+                      <i className="bi bi-bag"></i>
+                      <Badge pill bg="success" className={`roundpoint ${prodCount > 9 ? 'sup' : ''}`} >{prodCount}</Badge>
+                    </div>
+                  </Nav.Link>
+                ) : 
+                (
+                  <Nav.Link onClick={() => setOpen(!open)} as={Link} to="/auth" aria-label="Se connecter ou s'inscrire">
+                    <div className="user">
+                      <i className="bi bi-person"></i>
+                    </div>
+                  </Nav.Link>
+                )
+              }
             </Nav>
           </Navbar.Collapse>
         </Container>

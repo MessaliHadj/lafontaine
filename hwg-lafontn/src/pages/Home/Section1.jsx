@@ -1,9 +1,12 @@
-import Croger from '@/assets/croger.png'
-import CrogerLarge from '@/assets/croger-large.png'
 import { Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import Croger from '@/assets/croger.png'
+import CrogerLarge from '@/assets/croger-large.png'
+// import useLocalStorage from '@/components/CustomHook/useLocalStorage'
 
 const Section1 = () => {
+  // const [bourgignon, setBourgignon] = useLocalStorage('burger', '')
+
   return (
     <section className="hero_section">
       <Container>
