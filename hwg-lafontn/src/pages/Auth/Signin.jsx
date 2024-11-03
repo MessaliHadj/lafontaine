@@ -29,7 +29,7 @@ const Signin = ({addToggler}) => {
         alt="Signin Image" 
         />
       </div>
-      <Col className='formBx position-relative w-50 h-100'>
+      <Col xs={12} md={6} className='formBx position-relative h-100'>
         <Form className="position-absolute start-0 w-100 h-100 px-4">
           <h2 className="mt-3 text-center">Se connecter</h2>
           <Form.Group className="mb-3" controlId="formBasicEmail">

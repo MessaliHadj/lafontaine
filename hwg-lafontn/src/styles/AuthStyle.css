@@ -55,3 +55,16 @@
   background: transparent;
   border-color: var(--yellow);
 }
+/* 768px */
+@media (max-width: 768px) {
+  .auth.active .signinBx form {
+    top: 100%;
+  }
+  .auth .signupBx form {
+    top: -100%;
+  }
+  .auth .signinBx form,
+  .auth.active .signupBx form{
+    top: 0;
+  }
+}

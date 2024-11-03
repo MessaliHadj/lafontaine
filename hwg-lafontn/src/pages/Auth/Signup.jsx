@@ -33,13 +33,13 @@ const Signup = ({addToggler}) => {
         alt="Signin Image" 
         />
       </div>
-      <Col className='formBx position-relative w-50 h-100'>
+      <Col className='formBx position-relative w-50 w-md-100 h-100'>
         <Form className="position-absolute start-0 w-100 h-100 px-4">
           <h2 className="mt-3 text-center">S'inscrire</h2>
           {step === 1 && (
             <>
               <Row className="mb-3">
-                <Form.Group as={Col} controlId="formBasicFirstname">
+                <Form.Group as={Col} xs={12} sm={6} controlId="formBasicFirstname">
                   <Form.Label>Prenom</Form.Label>
                   <Form.Control
                     type="text"
@@ -50,7 +50,7 @@ const Signup = ({addToggler}) => {
                     required
                     />
                 </Form.Group>
-                <Form.Group as={Col} controlId="formBasicLastname">
+                <Form.Group as={Col} xs={12} sm={6} controlId="formBasicLastname">
                   <Form.Label>Nom</Form.Label>
                   <Form.Control
                     type="text"
