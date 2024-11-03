@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from "react";
-import { UserContext } from "@/components/Contexts/UserContext";
-import { Link } from "react-router-dom";
-import "@/styles/HeaderStyle.css";
 import {Container,Navbar, Nav, Badge } from 'react-bootstrap';
+import { useLocation, Link } from 'react-router-dom';
+import { UserContext } from "@/components/Contexts/UserContext";
+import "@/styles/HeaderStyle.css";
 import Logo from "@/assets/logo.png";
 
 const Header = () => {
@@ -11,20 +11,29 @@ const Header = () => {
   const [showScrollToTop, setShowScrollToTop] = useState(false);
   const [open, setOpen] = useState(false);
   const [prodCount, setProdCount] = useState(0);
+  const location = useLocation();
 
   useEffect(() => {
     let prevScrollPos = window.scrollY;
+    let stickyValue = 200;
+    let showValue = 825;
+  
+    if (location.pathname === '/auth') {
+      stickyValue = 0;
+      showValue = 0;
+    }
+
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      setIsSticky(scrollTop > 200);
-      setShowScrollToTop(scrollTop < 825 || prevScrollPos > scrollTop);
+      setIsSticky(scrollTop > stickyValue);
+      setShowScrollToTop(scrollTop < showValue || prevScrollPos > scrollTop);
       prevScrollPos = prevScrollPos = scrollTop;
     };
 
     window.addEventListener("scroll", handleScroll);
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [location.pathname]);
 
   const className = `navbar ${isSticky ? 'sticky' : ''} ${showScrollToTop ? 'active' : ''}`;
 

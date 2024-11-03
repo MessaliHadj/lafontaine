@@ -1,6 +1,6 @@
 import { Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import Cards from "@/components/Product/Cards"
+import Cards from "@/components/Utils/Cards"
 import Image1 from "@/assets/burger-5.png"
 import Image2 from "@/assets/burger-3.jpg"
 import Image3 from "@/assets/burger-4.jpg"

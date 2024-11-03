@@ -1,56 +1,37 @@
 import { Form, Button, Col } from 'react-bootstrap';
+import { useFormValidation } from '@/components/CustomHook/useFormValidation';
 import SigninImg from '@/assets/signin.webp';
 import SigninLargeImg from '@/assets/signin-large.webp';
-import { useEffect, useState, useRef } from 'react';
 
-const Signin = () => {
-  const [disabled, setDisabled] = useState(true);
-  const [inputType, setInputType] = useState("text");
-  const [inputValue, setInputValue] = useState({
+const Signin = ({addToggler}) => {
+
+  const initialValues = {
     email: '',
     phone_number: '',
     password: ''
-  });
-
-  const inputRef = useRef(null);
-
-  const REGEX = {
-    password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@&#$%]).{8,23}$/,
-    phoneNumber: /^\+(?:\d{1,3})?\d{10,14}$/,
-    email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
   };
 
-  const updateInputTypeAndValue = () => {
-    const value = inputRef.current.value;
-    const isEmail = /[a-zA-Z]/.test(value);
-    setInputType(value === '' ? 'text' : isEmail ? 'email' : 'tel');
-    setInputValue((prev) => ({
-      ...prev,
-      email: isEmail ? value : '',
-      phone_number: isEmail ? '' : value
-    }));
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setInputValue(prev => ({ ...prev, [name]: value }));
-  };
-
-  const validateInputs = () => {
-    const { email, phone_number, password } = inputValue;
-    const isEmailValid = email && REGEX.email.test(email) && REGEX.password.test(password);
-    const isPhoneNumberValid = phone_number && REGEX.phoneNumber.test(phone_number) && REGEX.password.test(password);
-    setDisabled(!(isEmailValid || isPhoneNumberValid));
-  };
-
-  useEffect(validateInputs, [inputValue]);
+  const {
+    inputType,
+    disabled,
+    inputRef,
+    handleChange,
+    updateInputTypeAndValue,
+  } = useFormValidation(initialValues, 'signin');
 
   return (
-    <div className="form-container d-flex mx-auto">
-      <img src={SigninImg} srcSet={`${SigninLargeImg} 1200w`} alt="Signin Image" className="d-none d-md-block" />
-      <Col>
-        <h2 className="mt-3 text-center">Se connecter</h2>
-        <Form className="mx-4">
+    <>
+      <div className="imgBx d-none d-md-block position-relative w-50">
+        <img 
+        src={SigninImg} 
+        srcSet={`${SigninLargeImg} 1200w`}
+        className='position-absolute start-0 w-100 h-100' 
+        alt="Signin Image" 
+        />
+      </div>
+      <Col className='formBx position-relative w-50 h-100'>
+        <Form className="position-absolute start-0 w-100 h-100 px-4">
+          <h2 className="mt-3 text-center">Se connecter</h2>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Adresse email ou num de téléphone</Form.Label>
             <Form.Control
@@ -77,13 +58,13 @@ const Signin = () => {
             Connexion
           </Button>
           <span className="ms-3">ou</span>
-          <Button className="ms-3 my-0 btn switch_auth">
+          <Button type="button" onClick={(e) => addToggler(e)} className="ms-3 my-0 btn switch_auth">
             Créer un compte
           </Button>
           <hr />
         </Form>
       </Col>
-    </div>
+    </>
   );
 };
 

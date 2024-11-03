@@ -1,29 +1,56 @@
-.form-container {
-  width: 800px;
+.auth {
+  height: 500px;
+  background: var(--light-grey);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
+}
+.auth .sign {
+  height: 100%;
+}
+.auth .signupBx {
+  pointer-events: none;
+}
+.auth.active .signupBx {
+  pointer-events: initial;
+}
+.auth form,
+.auth img {
+  transition: 0.5s;
+}
+.auth .signupBx form,
+.auth.active .signinBx form {
+  top: 100%;
+}
+.auth .signupBx .imgBx img,
+.auth.active .signinBx .imgBx img {
+  top: -100%;
+}
+.auth .signinBx .imgBx img,
+.auth .signinBx form,
+.auth.active .signupBx .imgBx img,
+.auth.active .signupBx form{
+  top: 0;
+}
+.auth .sign .formBx form{
   background: var(--light-grey);
 }
-.form-container img {
-  width: 400px;
-  height: 500px;
-}
-.form-container h2 {
+.auth h2 {
   color: var(--light-black);
 }
-.form-container label {
+.auth label {
   font-family: var(--oswald-font);
   font-weight: 400;
 }
-.form-container button {
+.auth button {
   font-family: var(--oswald-font);
   color: var(--light-black);
 }
-.form-container .switch_auth {
+.auth .switch_auth {
   background: var(--yellow);
   border-color: var(--yellow);
   transition: all 300ms ease-in-out;
 }
-.form-container .switch_auth:hover,
-.form-container .switch_auth:focus {
+.auth .switch_auth:hover,
+.auth .switch_auth:focus {
   color: var(--yellow);
   background: transparent;
   border-color: var(--yellow);
