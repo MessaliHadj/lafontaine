@@ -65,7 +65,6 @@ const HandleForm = (initialValues, endpoint, methode) => {
         ...options,
         body: JSON.stringify(inputValue),
       };
-      console.log(options);
       
       try {
         await fetchData(requestUrl, requestOptions);
@@ -80,7 +79,6 @@ const HandleForm = (initialValues, endpoint, methode) => {
       console.log(error.message);
     }
     if (data) {
-      console.log(data);
       if (data.access_token) {
         updateCookie(data.access_token);
         setUser(data.user);
