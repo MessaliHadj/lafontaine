@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import "@/styles/AuthStyle.css";
 import { UserContext } from '@/components/Contexts/UserContext';
 import ScrollToTop from "@/components/Handler/ScrollToTop";
-import Signin from "./Login";
+import Signin from "./Signin";
 import Signup from "./Signup";
 
 const index = () => {

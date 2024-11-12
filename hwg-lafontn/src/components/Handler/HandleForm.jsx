@@ -12,7 +12,7 @@ const HandleForm = (initialValues, endpoint, methode) => {
   const [inputType, setInputType] = useState("text");
   const [touchedFields, setTouchedFields] = useState({});
 
-  const { disabled, errorMsg, step, setStep } = useFormValidations(inputValue, endpoint)
+  const { disabled, errorMsg, setErrorMsg, step, setStep } = useFormValidations(inputValue, endpoint)
   const { data, loading, error, fetchData } = useFetch();
 
   const { cookieValue, updateCookie, removeCookie } = useCookie('token');
@@ -65,7 +65,6 @@ const HandleForm = (initialValues, endpoint, methode) => {
         ...options,
         body: JSON.stringify(inputValue),
       };
-      
       try {
         await fetchData(requestUrl, requestOptions);
       } catch (error) {
@@ -76,7 +75,10 @@ const HandleForm = (initialValues, endpoint, methode) => {
 
   useEffect(() => {
     if (error) {
-      console.log(error.message);
+      setErrorMsg(prev => ({
+        ...prev,
+        submit: error.message
+      }))
     }
     if (data) {
       if (data.access_token) {

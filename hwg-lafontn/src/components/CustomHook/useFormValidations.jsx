@@ -64,7 +64,7 @@ const useFormValidations = (inputValue, form) => {
     }
   }, [validationResult, step, form]);
 
-  return { validationResult, errorMsg, step, setStep, disabled, setDisabled };
+  return { validationResult, errorMsg, setErrorMsg, step, setStep, disabled, setDisabled };
 };
 
 export default useFormValidations;

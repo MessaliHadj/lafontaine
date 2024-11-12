@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Form, Button, Col } from 'react-bootstrap';
+import { useState } from 'react';
+import { Form, Button, Col, Alert } from 'react-bootstrap';
 import useLocalStorage from '@/components/CustomHook/useLocalStorage';
 import HandleForm from '@/components/Handler/HandleForm';
 
@@ -101,6 +101,7 @@ const Signin = ({addToggler}) => {
               label="Se souvenir de moi"
             />
           </Form.Group>
+          {errorMsg.submit && (<Alert variant="warning">{errorMsg.submit}</Alert>)}
           <Button 
             variant="primary" 
             type='submit'

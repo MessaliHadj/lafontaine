@@ -64,7 +64,7 @@ exports.getAuth = async (req, res, next) => {
       return res.status(400).json({message: 'Bad request please verify your informations'})
     
     if (email && !validator.isEmail(email)) 
-      throw new AuthenticationError('Invalid email format')
+      return res.status(400).json({message: 'Invalid email format'})
     
     let user = await User.findOne({ 
       where: {[Op.or]: [
@@ -77,7 +77,7 @@ exports.getAuth = async (req, res, next) => {
       return res.status(400).json({message: 'Bad request please verify your informations'})
     let verif = await authService.comparePassword(password, user.password);
     if(!verif) 
-      return res.status(400).json('Bad request please verify your informations');
+      return res.status(400).json({message: 'Bad request please verify your informations'});
 
     let accessToken;
     let refreshExist = await getRefreshToken(user, res);
@@ -98,8 +98,7 @@ exports.getAuth = async (req, res, next) => {
 
     return res.json({access_token: accessToken, user: resUser});
   } catch (error) {
-    console.error("Error in getAuth:", error);
-    next(error);
+    throw new AuthenticationError("Error in getAuth: ", error)
   }
 };
 

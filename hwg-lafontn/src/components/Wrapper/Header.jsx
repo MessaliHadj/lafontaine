@@ -41,10 +41,10 @@ const Header = () => {
     <header>
       <Navbar collapseOnSelect fixed="top" expand="lg" className={className} >
         <Container>
-          <Navbar.Brand onClick={() => setOpen(!open)} as={Link} to="/" className="logo">
+          <Navbar.Brand onClick={() => open && setOpen(!open)} as={Link} to="/" className="logo">
             <img src={Logo} alt="logo de la Font'n" className="img-fluid" />
           </Navbar.Brand>
-          {user && (
+          {(user && location.pathname !== '/account') && (
             <Link to="/account" aria-label="Mon profil" className="profilBx text-center">
               <div className="profil mx-auto">
                 <img src={`https://api.dicebear.com/9.x/fun-emoji/svg?seed=${user?.phone_number}`} alt="avatar" />
