@@ -1,8 +1,7 @@
 import { Form, Button, Row, Col } from 'react-bootstrap';
-import { useFormValidation } from '@/components/CustomHook/useFormValidation';
+import useFormValidation from '@/components/CustomHook/useFormValidation';
 import SignupImg from '@/assets/signup.webp'
 import SignupLargeImg from '@/assets/signup-large.webp'
-import { useState } from 'react';
 
 const Signup = ({addToggler}) => {
 

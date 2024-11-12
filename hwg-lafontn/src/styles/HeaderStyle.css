@@ -53,6 +53,25 @@ header .sticky .nav-link {
 header .nav-link:hover {
   color: #f7be27;
 }
+header .cart {
+  margin-top: 2.5px;
+}
+header .profilBx {
+  position: absolute;
+  right: 20px;
+  top: 80px;
+}
+header .profilBx p {
+  font-size: 1.3rem;
+  font-weight: 400;
+  font-family: var(--oleo-font);
+}
+header .profil {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+}
 header .cart,
 header .user {
   position: relative;
@@ -78,7 +97,8 @@ header .roundpoint.sup {
 }
 
 @media (max-width: 992px) {
-  header i,
+  header .user i,
+  header .cart i,
   header .nav-link {
     font-size: 2rem;
   }

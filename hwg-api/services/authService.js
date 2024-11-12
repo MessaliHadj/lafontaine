@@ -19,16 +19,29 @@ const comparePassword = async (password, userPassword) => {
   }
 }
 
-const generateToken = user => {
+const generateToken = (user, time = during) => {
   try {
     return token = jwt.sign({
       id: user.id, 
       role: user.role, 
       user: user.email || user.phone_number
-    }, secret, during)
+    }, secret, time)
   } catch (error) {
     throw new Error(error);
   }
 }
 
-module.exports = { extractBearer, comparePassword, generateToken }
+const compareRefreshToken = async (refresh, refreshStored) => {
+  try {
+    return isValid = await bcrypt.compare(refresh, refreshStored);
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+const generateRefreshToken = async (user) => {
+  // Renvoie le refresh token brut pour l’envoyer en tant que cookie
+  return generateToken(user, { expiresIn: '7d' });
+};
+
+module.exports = { extractBearer, comparePassword, generateToken, compareRefreshToken, generateRefreshToken }

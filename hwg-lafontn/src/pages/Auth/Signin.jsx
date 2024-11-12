@@ -1,5 +1,5 @@
 import { Form, Button, Col } from 'react-bootstrap';
-import { useFormValidation } from '@/components/CustomHook/useFormValidation';
+import useFormValidation from '@/components/CustomHook/useFormValidation';
 import SigninImg from '@/assets/signin.webp';
 import SigninLargeImg from '@/assets/signin-large.webp';
 
@@ -16,6 +16,7 @@ const Signin = ({addToggler}) => {
     disabled,
     inputRef,
     handleChange,
+    handleSubmit,
     updateInputTypeAndValue,
   } = useFormValidation(initialValues, 'signin');
 
@@ -54,11 +55,21 @@ const Signin = ({addToggler}) => {
               required
             />
           </Form.Group>
-          <Button variant="primary" type="submit" className="btn" disabled={disabled}>
+          <Button 
+            variant="primary" 
+            type='submit'
+            onClick={e=>handleSubmit(e)}
+            className="btn" 
+            disabled={disabled}
+          >
             Connexion
           </Button>
           <span className="ms-3">ou</span>
-          <Button type="button" onClick={(e) => addToggler(e)} className="ms-3 my-0 btn switch_auth">
+          <Button 
+            type="button" 
+            onClick={(e) => addToggler(e)} 
+            className="ms-3 my-0 btn switch_auth"
+          >
             Créer un compte
           </Button>
           <hr />

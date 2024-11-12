@@ -1,18 +1,26 @@
 import { Container, Row, Col } from 'react-bootstrap'
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "@/styles/AuthStyle.css";
+import { UserContext } from '@/components/Contexts/UserContext';
 import ScrollToTop from "@/components/Handler/ScrollToTop";
-import Signin from "./Signin";
+import Signin from "./Login";
 import Signup from "./Signup";
 
 const index = () => {
 
-  const [toggleForm, setToggleForm] = useState(false)
+  const [toggleForm, setToggleForm] = useState(false);
+  const { user } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const addToggler = e => {
     e.preventDefault(); 
     setToggleForm(!toggleForm)
   }
+
+  useEffect(() => {
+    user && navigate('/');
+  }, [user, navigate]);
 
   useEffect(()=>{
     if (!toggleForm) {

@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 
 const DB = require('./db.config')
+const refreshTask = require('./tasks/refresh')
 const user_router = require('./routes/user')
 const family_router = require('./routes/family')
 const order_router = require('./routes/order')
@@ -24,7 +25,9 @@ const routers = [
   { path: '/api/v1/signup', route: signup_router }
 ];
 
-app.use(cors());
+app.use(cors({
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({extended : true}));
 

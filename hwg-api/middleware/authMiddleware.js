@@ -58,3 +58,16 @@ exports.checkRequest = (req, res, next) => {
     next(error);
   }
 }
+
+exports.checkRefresh = (req, res, next) => {
+  try {
+    jwt.verify(getToken(req, res), secret, (err, decodedToken) => {
+      if(err) throw new UserError("This token is not correct", 1)
+      if(decodedToken.id !== parseInt(req.params.id))
+        req.params.id = decodedToken.id;
+      next();
+    })
+  } catch (error) {
+    next(error);
+  }
+}

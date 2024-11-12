@@ -1,13 +1,39 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
+import useFetch from '@/components/CustomHook/useFetch';
+import useLocalStorage from '@/components/CustomHook/useLocalStorage';
 import { Regex } from '../Utils/Regex';
 
+const apiBaseUrl = import.meta.env.VITE_LAFONTN_API;
 
-export const useFormValidation = (initialValues, formType) => {
+const useFormValidation = (initialValues, formType) => {
   const [inputType, setInputType] = useState("text");
   const [inputValue, setInputValue] = useState(initialValues);
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(1);
   const [disabled, setDisabled] = useState(true);
   const inputRef = useRef(null);
+  const { data, fetchData } = useFetch();
+  // const [token, setToken] = useLocalStorage('token', null);
+
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: ''
+  };
+
+  const validationResult = useMemo(() => {
+    const { firstname, lastname, email, phone_number, password, verifPassword } = inputValue;
+
+    return {
+      isFirstnameValid: firstname && Regex.userName.test(firstname),
+      isLastnameValid: lastname && Regex.userName.test(lastname),
+      isEmailValid: email && Regex.email.test(email),
+      isPhoneNumberValid: phone_number && Regex.phoneNumber.test(phone_number),
+      isPasswordValid: password && Regex.password.test(password),
+      isPasswordVerified: password === verifPassword,
+    };
+  }, [inputValue]);
 
   const updateInputTypeAndValue = () => {
     const value = inputRef.current.value;
@@ -16,7 +42,7 @@ export const useFormValidation = (initialValues, formType) => {
     setInputValue((prev) => ({
       ...prev,
       email: isEmail ? value : '',
-      phone_number: isEmail ? '' : value.replace(/^0/, '+33')
+      phone_number: isEmail ? '' : value.replace(/^0/, '+33'),
     }));
   };
 
@@ -28,28 +54,58 @@ export const useFormValidation = (initialValues, formType) => {
     }));
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (inputValue && !disabled) {
+      const endpoint = formType === 'signin' ? 'login' : 'signup';
+      const requestUrl = `${apiBaseUrl}${endpoint}`;
+      const requestOptions = {
+        ...options,
+        body: JSON.stringify(inputValue),
+      };
+      console.log('url de la requete:', requestUrl);
+
+      try {
+        const result = await fetchData(requestUrl, requestOptions);
+        console.log(result);
+        if (result && result.access_token) {
+          setToken(result.access_token);
+        }
+      } catch (error) {
+        console.error('Erreur lors de la requête:', error);
+      }
+    }
+  };
+
   useEffect(() => {
-    const { firstname, lastname, email, phone_number, password, verifPassword } = inputValue;
-    const isFirstnameValid = firstname && Regex.userName.test(firstname);
-    const isLastnameValid = lastname && Regex.userName.test(lastname);
-    const isEmailValid = email && Regex.email.test(email);
-    const isPhoneNumberValid = phone_number && Regex.phoneNumber.test(phone_number);
-    const isPasswordValid = password && Regex.password.test(password);
-    const isPasswordVerified = password === verifPassword;
+    const {
+      isFirstnameValid,
+      isLastnameValid,
+      isEmailValid,
+      isPhoneNumberValid,
+      isPasswordValid,
+      isPasswordVerified
+    } = validationResult;
+
     if (formType === 'signin') {
       setDisabled(!((isEmailValid || isPhoneNumberValid) && isPasswordValid));
     } else if (formType === 'signup') {
       if (step === 1) {
         setDisabled(!(isFirstnameValid && isLastnameValid && isPhoneNumberValid));
-      }
-      if (step === 2) {
+      } else if (step === 2) {
         setDisabled(!(isFirstnameValid && isLastnameValid && isPhoneNumberValid && isEmailValid));
-      }
-      if (step === 3) {
-        setDisabled(!(isFirstnameValid && isLastnameValid && isPhoneNumberValid && isEmailValid && isPasswordValid && isPasswordVerified));
+      } else if (step === 3) {
+        setDisabled(!(
+          isFirstnameValid &&
+          isLastnameValid &&
+          isPhoneNumberValid &&
+          isEmailValid &&
+          isPasswordValid &&
+          isPasswordVerified
+        ));
       }
     }
-  }, [inputValue, step]);
+  }, [validationResult, step, formType]);
 
   return {
     inputType,
@@ -59,6 +115,9 @@ export const useFormValidation = (initialValues, formType) => {
     inputRef,
     setStep,
     handleChange,
+    handleSubmit,
     updateInputTypeAndValue,
   };
 };
+
+export default useFormValidation;

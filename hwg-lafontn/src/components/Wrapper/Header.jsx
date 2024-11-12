@@ -44,6 +44,14 @@ const Header = () => {
           <Navbar.Brand onClick={() => setOpen(!open)} as={Link} to="/" className="logo">
             <img src={Logo} alt="logo de la Font'n" className="img-fluid" />
           </Navbar.Brand>
+          {user && (
+            <Link to="/account" aria-label="Mon profil" className="profilBx text-center">
+              <div className="profil mx-auto">
+                <img src={`https://api.dicebear.com/9.x/fun-emoji/svg?seed=${user?.phone_number}`} alt="avatar" />
+              </div>
+              <p>{user.firstname}</p>
+            </Link>
+          )}
           <Navbar.Toggle onClick={() => setOpen(!open)} aria-controls="navbarScroll" aria-expanded={open} />
           <Navbar.Collapse in={open} id="navbarScroll">
             <Nav className="ms-auto" navbarScroll>

@@ -42,7 +42,7 @@ exports.getUserById = async (req, res, next) => {
     if(!user) 
       throw new UserError('This user does not exist !', 0);
 
-    return res.json({data: user});
+    return res.json({user: user});
   } catch (error) {
     next(error);
   }
@@ -94,9 +94,28 @@ exports.updateUser = async (req, res, next) => {
     let user = await User.findOne({ where: {id: userId}, raw: true });
     
     if (!user) throw new UserError('Invalid id', 0);
+
+    if (req.body.role) throw new RequestError('Invalid or missing parameter');
   
     user = await User.update(req.body, { where: {id: userId} })
-    return res.status(201).json({msg: 'User successfully updated', user: user});
+    return res.status(201).json({message: 'User successfully updated'});
+  } catch (error) {
+    next(error);
+  }
+}
+
+exports.updateRoleUser = async (req, res, next) => {
+  try {
+    let userId = parseInt(req.params.id);
+    let role = req.body.role;
+    if(!userId || role) throw new RequestError('Invalid or missing parameter');
+    
+    let user = await User.findOne({ where: {id: userId}, raw: true });
+    
+    if (!user) throw new UserError('Invalid id', 0);
+
+    user = await User.update(req.body, { where: {id: userId} })
+    return res.status(201).json({message: 'User successfully updated'});
   } catch (error) {
     next(error);
   }
@@ -108,7 +127,7 @@ exports.restoreUser = async (req, res) => {
     if(!userId) throw new UserError('Invalid or missing parameter');
 
     await User.restore({ where: {id: userId} });
-    return res.status(201).json({msg: 'User successfully restored'});
+    return res.status(201).json({message: 'User successfully restored'});
   } catch (error) {
     next(error);
   }
@@ -120,7 +139,7 @@ exports.softDeleteUser = async (req, res) => {
     if(!userId) throw new UserError('Invalid or missing parameter');
 
     await User.destroy({ where: {id: userId} });
-    return res.status(204).json({msg: 'User successfully deleted'});
+    return res.status(204).json({message: 'User successfully deleted'});
   } catch (error) {
     next(error);
   }
@@ -132,7 +151,7 @@ exports.hardDeleteUser = async (req, res) => {
     if(!userId) throw new UserError('Invalid or missing parameter');
 
     await User.destroy({ where: {id: userId}, force: true });
-    return res.status(204).json({msg: 'User successfully deleted'});
+    return res.status(204).json({message: 'User successfully deleted'});
   } catch (error) {
     next(error);
   }

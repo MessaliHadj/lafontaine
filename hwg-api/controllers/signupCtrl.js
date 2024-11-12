@@ -25,7 +25,7 @@ exports.setNewUser = async (req, res, next) => {
     const createdUser = await User.create(newUser)
 
     return res.status(201).json({
-      msg: 'User successfully created', 
+      message: 'User successfully created', 
       access_token: authService.generateToken(createdUser)
     });
   } catch (error) {
