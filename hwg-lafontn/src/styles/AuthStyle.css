@@ -55,6 +55,12 @@
   background: transparent;
   border-color: var(--yellow);
 }
+.auth .recaptcha {
+  position: relative;
+}
+.auth .recaptcha iframe {
+  transform: scale(0.8);
+}
 /* 768px */
 @media (max-width: 768px) {
   .auth.active .signinBx form {

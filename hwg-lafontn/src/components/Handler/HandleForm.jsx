@@ -30,13 +30,26 @@ const HandleForm = (initialValues, endpoint, methode) => {
     body: ''
   };
 
+  const normalizeValue = (name, value) => {
+    if (name == 'phone_number') {
+      return value = value.replace(/\s+/g, '').replace(/^0/, '+33').trim()
+    }
+    if (name == 'email') {
+      return value = value.toLowerCase().trim()
+    }
+    if (name == 'firstname' || name == 'lastname') {
+      return value = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+    }
+    return value
+  }
+
   const updateInputTypeAndValue = value => {
     const isEmail = /[a-zA-Z]/.test(value);
     setInputType(value === '' ? 'text' : isEmail ? 'email' : 'tel');
     setInputValue((prev) => ({
       ...prev,
-      email: isEmail ? value : '',
-      phone_number: isEmail ? '' : value.replace(/^0/, '+33'),
+      email: isEmail ? value.toLowerCase().trim() : '',
+      phone_number: isEmail ? '' : value.replace(/\s+/g, '').replace(/^0/, '+33').trim(),
     }));
   };
 
@@ -48,7 +61,7 @@ const HandleForm = (initialValues, endpoint, methode) => {
     } else {
       setInputValue((prev) => ({
         ...prev,
-        [name]: name === 'phone_number' ? value.replace(/^0/, '+33').trim() : typeof(value) == String ? value.trim() : value,
+        [name]: normalizeValue(name, value)
       }));
     }
   };
@@ -101,15 +114,4 @@ const HandleForm = (initialValues, endpoint, methode) => {
   }
 }
 
-export default HandleForm
-
-
-  // const normalizeValue = (name, value) => {
-  //   if (name = 'phone_number') {
-  //     return value = value.replace(/\s+/g, '').replace(/^0/, '+33').trim()
-  //   }
-  //   if (name = 'email') {
-  //     return value = value.toLowerCase().trim()
-  //   }
-  //   return value
-  // }
+export default HandleForm;

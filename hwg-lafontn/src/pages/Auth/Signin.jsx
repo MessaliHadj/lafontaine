@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { Form, Button, Col, Alert } from 'react-bootstrap';
+import ReCAPTCHA from 'react-google-recaptcha';
 import useLocalStorage from '@/components/CustomHook/useLocalStorage';
 import HandleForm from '@/components/Handler/HandleForm';
 
 import SigninImg from '@/assets/signin.webp';
 import SigninLargeImg from '@/assets/signin-large.webp';
+
+const sitekey = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
 
 const Signin = ({addToggler}) => {
 
@@ -12,6 +15,7 @@ const Signin = ({addToggler}) => {
   const initialIdentifier = savedIdentifier !== 'null' ? savedIdentifier : '';
   const [identifier, setIdentifier] = useLocalStorage('identifier', initialIdentifier);
   const [isChecked, setIsChecked] = useState(!!initialIdentifier)
+  const [reCaptchaVal, setReCaptchaVal] = useState(null)
 
   let initialValues = {
     email: initialIdentifier?.includes('@') ? initialIdentifier : '',
@@ -91,7 +95,7 @@ const Signin = ({addToggler}) => {
               {touchedFields.password &&  errorMsg.password}
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicRememberMe">
+          <Form.Group className="mb-3 d-flex flex-wrap justify-content-between" controlId="formBasicRememberMe">
             <Form.Check
               type="checkbox"
               name="rememberMe"
@@ -99,6 +103,11 @@ const Signin = ({addToggler}) => {
               checked={isChecked}
               id="formBasicRememberMe"
               label="Se souvenir de moi"
+            />
+            <ReCAPTCHA 
+              className='recaptcha'
+              sitekey={sitekey}
+              onChange={val=> setRecaptchaVal(val)}
             />
           </Form.Group>
           {errorMsg.submit && (<Alert variant="warning">{errorMsg.submit}</Alert>)}
