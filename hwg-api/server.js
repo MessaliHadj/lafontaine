@@ -11,6 +11,7 @@ const menu_router = require('./routes/menu')
 const auth_router = require('./routes/auth')
 const signup_router = require('./routes/signup')
 const logMiddleware = require('./middleware/logMiddleware')
+const errorMiddleware = require('./middleware/errorMiddleware')
 
 const app = express();
 const port = process.env.SERVER_PORT;
@@ -42,6 +43,8 @@ routers.forEach(({ path, route }) => app.use(path, route));
 app.get('*', (req, res) => {
   res.status(404).send('Resource not found.');
 });
+
+app.use(errorMiddleware)
 
 DB.authenticate()
   .then(()=> console.log('The connection to database well done.'))

@@ -2,7 +2,6 @@ const { Op } = require('sequelize')
 
 const User = require('../models/user');
 const authService = require('../services/authService');
-const userService = require('../services/userService');
 const { RequestError, UserError } = require('../services/errorService');
 
 exports.setNewUser = async (req, res, next) => {

@@ -47,7 +47,7 @@ const Header = () => {
           {(user && location.pathname !== '/account') && (
             <Link to="/account" aria-label="Mon profil" className="profilBx text-center">
               <div className="profil mx-auto">
-                <img src={`https://api.dicebear.com/9.x/fun-emoji/svg?seed=${user?.phone_number}`} alt="avatar" />
+                <img src={`https://api.dicebear.com/9.x/fun-emoji/svg?seed=${user?.email}`} alt="avatar" />
               </div>
               <p>{user.firstname}</p>
             </Link>

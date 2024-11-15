@@ -54,9 +54,6 @@ const UserProvider = ({children}) => {
   useEffect(() => {
     if (user) {
       localStorage.setItem('userId', JSON.stringify(user.id));
-    } else {
-      localStorage.removeItem('userId');
-      removeCookie()
     }
   }, [user]);
 

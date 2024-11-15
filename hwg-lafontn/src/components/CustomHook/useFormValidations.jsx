@@ -30,9 +30,12 @@ const useFormValidations = (inputValue, form) => {
 
     const newErrorMsg = {};
     if (!isFirstnameValid && firstname) 
-      newErrorMsg.firstname = "Le nom doit contenir que des lettres, des espaces, des apostrophes ou des tirets. Longueur maximale : 23 caractères.";
+      newErrorMsg.firstname = "Le prenom doit contenir que des lettres, des espaces, des apostrophes ou des tirets. Longueur maximale : 23 caractères.";
     if (!isLastnameValid && lastname) 
-      newErrorMsg.lastname = "Le prenom doit contenir que des lettres, des espaces, des apostrophes ou des tirets. Longueur maximale : 23 caractères.";
+      newErrorMsg.lastname = "Le nom doit contenir que des lettres, des espaces, des apostrophes ou des tirets. Longueur maximale : 23 caractères.";
+    if (!isLastnameValid && lastname && !isFirstnameValid && firstname) {
+      newErrorMsg.completname = "Le nom et le prenom doivent contenir que des lettres, des espaces, des apostrophes ou des tirets. Longueur maximale : 23 caractères.";
+    }
     if (!isEmailValid && email) 
       newErrorMsg.email = "Adresse email doit avoir le bon format.";
     if (!isPhoneNumberValid && phone_number) 

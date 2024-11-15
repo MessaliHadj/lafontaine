@@ -59,25 +59,25 @@ const setRefreshToken = async (user, res) => {
 exports.getAuth = async (req, res, next) => {
   try {
     const { email, phone_number, password } = req.body;
-  
+
     if((!email && !phone_number) || !password) 
-      return res.status(400).json({message: 'Bad request please verify your informations'})
-    
+      throw new AuthenticationError('Bad request please verify your informations', 0)
+
     if (email && !validator.isEmail(email)) 
-      return res.status(400).json({message: 'Invalid email format'})
-    
+      throw new AuthenticationError('Invalid email format', 0)
+
     let user = await User.findOne({ 
       where: {[Op.or]: [
         { email: email || null }, 
         { phone_number: phone_number || null }
       ]}
     })
-      
+
     if(!user) 
-      return res.status(400).json({message: 'Bad request please verify your informations'})
+      throw new AuthenticationError('Bad request please verify your informations', 0)
     let verif = await authService.comparePassword(password, user.password);
     if(!verif) 
-      return res.status(400).json({message: 'Bad request please verify your informations'});
+      throw new AuthenticationError('Bad request please verify your informations', 0);
 
     let accessToken;
     let refreshExist = await getRefreshToken(user, res);
@@ -108,16 +108,16 @@ exports.getNewAccessToken = async (req, res, next) => {
     let userId = parseInt(req.params.id);
 
     if (!refreshToken || !userId) {
-      return res.status(403).json({ message: 'Invalid or missing parameter' });
+      throw new RequestError('Invalid or missing parameter: Missing refresh token or user ID');
     }
 
     const storedToken = await Refresh.findOne({ 
       where: { userId: userId }
     });
 
-    if (!storedToken) return res.status(403).json({ message: "Invalid refresh token" });
+    if (!storedToken) throw new RequestError("Invalid refresh token");
     const isValid = await authService.compareRefreshToken(refreshToken, storedToken.refreshToken);
-    if (!isValid) return res.status(403).json({ message: "Invalid refresh token" });
+    if (!isValid) throw new RequestError("Invalid refresh token");
 
     let user = await User.findOne({ where: {id: userId}, raw: true });
 
@@ -128,26 +128,3 @@ exports.getNewAccessToken = async (req, res, next) => {
     next(error);
   }
 };
-
-// exports.setRefreshToken = async (req, res, next) => {
-//   try {
-//     const { refreshToken } = req.cookies;
-
-//     if (!refreshToken) {
-//       return res.status(403).json({ message: "No token found" });
-//     }
-
-//     const storedToken = await Refresh.findOne({ 
-//       where: { userId: req.user.id }
-//     });
-
-//     const isValid = await bcrypt.compare(refreshToken, storedToken.refreshToken);
-//     if (!isValid) return res.status(403).json({ message: "Invalid refresh token" });
-
-//     // Générer un nouveau token d'accès
-//     const newAccessToken = authService.generateToken(storedToken.userId);
-//     res.json({ access_token: newAccessToken });
-//   } catch (error) {
-//     next(error);
-//   }
-// };

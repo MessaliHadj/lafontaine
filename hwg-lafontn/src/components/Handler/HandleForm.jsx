@@ -88,7 +88,28 @@ const HandleForm = (initialValues, endpoint, methode) => {
     }
   }, [data, error]);
 
-  return {inputValue, inputType, disabled, touchedFields, errorMsg, step, setStep, handleChange, handleBlur, handleSubmit}
+  return {
+    inputValue, 
+    inputType, 
+    disabled, 
+    touchedFields, 
+    errorMsg, 
+    step, setStep, 
+    handleChange, 
+    handleBlur, 
+    handleSubmit
+  }
 }
 
 export default HandleForm
+
+
+  // const normalizeValue = (name, value) => {
+  //   if (name = 'phone_number') {
+  //     return value = value.replace(/\s+/g, '').replace(/^0/, '+33').trim()
+  //   }
+  //   if (name = 'email') {
+  //     return value = value.toLowerCase().trim()
+  //   }
+  //   return value
+  // }

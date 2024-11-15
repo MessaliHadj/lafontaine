@@ -1,11 +1,11 @@
 import { Container, Row, Col } from 'react-bootstrap'
 import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import "@/styles/AuthStyle.css";
 import { UserContext } from '@/components/Contexts/UserContext';
+import "@/styles/AuthStyle.css";
 import ScrollToTop from "@/components/Handler/ScrollToTop";
 import Signin from "./Signin";
-import Signup from "./Signup";
+import Signup from "./Login";
 
 const index = () => {
 
