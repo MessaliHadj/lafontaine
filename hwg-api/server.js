@@ -27,6 +27,8 @@ const routers = [
 ];
 
 app.use(cors({
+  origin: 'https://lafontn.fr',
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
   credentials: true
 }));
 app.use(express.json());
