@@ -107,7 +107,7 @@ const Signin = ({addToggler}) => {
             <ReCAPTCHA 
               className='recaptcha'
               sitekey={sitekey}
-              onChange={val=> setRecaptchaVal(val)}
+              onChange={(val)=> {setReCaptchaVal(val)}}
             />
           </Form.Group>
           {errorMsg.submit && (<Alert variant="warning">{errorMsg.submit}</Alert>)}
