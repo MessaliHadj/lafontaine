@@ -4,6 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import Tiktok from '@/assets/tiktok.png'
 import Instagram from '@/assets/instagram.png'
 import Youtube from '@/assets/youtube.png'
+import Facebook from '@/assets/facebook.png'
 
 const Footer = () => {
   return (
@@ -45,14 +46,14 @@ const Footer = () => {
                   suivez nous
                 </h3>
                 <span>
-                  <Link to="/" aria-label="tiktok" className="mx-3">
+                  <Link to="https://www.tiktok.com/@la_font_n" aria-label="tiktok" className="mx-3">
                     <img src={Tiktok} alt="logo de TikTok" />
                   </Link>
-                  <Link to="/" aria-label="instagram" className="mx-3">
+                  <Link to="https://www.instagram.com/lafontainedelaplace/" aria-label="instagram" className="mx-3">
                     <img src={Instagram} alt="logo d'instagram" />
                   </Link>
-                  <Link to="/" aria-label="youtube" className="mx-3">
-                    <img src={Youtube} alt="logo de YouTube" />
+                  <Link to="/" aria-label="facebook" className="mx-3">
+                    <img src={Facebook} alt="logo de Facebook" />
                   </Link>
                 </span>
               </div>            
