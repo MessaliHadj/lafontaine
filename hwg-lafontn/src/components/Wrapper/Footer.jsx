@@ -26,8 +26,8 @@ const Footer = () => {
                 </h3>
                 <p className="calling_sup_text">Commander via WhatsApp</p>
                 <address>
-                  <a href="whatsapp://send?phone=+33633270270" className="calling link-underline link-underline-opacity-0">
-                  <i className="bi bi-telephone"></i> 06 33 270 270
+                  <a href="https://wa.me/33759584601" target="_blank" className="calling link-underline link-underline-opacity-0">
+                  <i className="bi bi-telephone"></i> 07 59 58 46 01
                   </a>
                 </address>
               </div>

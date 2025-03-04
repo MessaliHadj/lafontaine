@@ -10,8 +10,8 @@ const Section7 = () => {
             <h3>une commande prête en moins de 10 minutes!</h3>
             <p>Envie d'un burger ? Pas de problème ! Commandez et récupérez votre burger préféré en moins de 10 minutes. Nous préparons tout à la minute pour vous garantir un maximum de saveur. Un service rapide et efficace pour satisfaire toutes vos envies.</p>
             <address className='btn btn-red px-4 py-2 rounded-0'>
-              <a href="tel:+13115552368" className="text-reset link-underline link-underline-opacity-0">
-                <i className="bi bi-telephone">&#x202F; &#x202F; 06 33 270 270</i>
+              <a href="https://wa.me/33759584601" target="_blank" className="text-reset link-underline link-underline-opacity-0">
+                <i className="bi bi-telephone">&#x202F; &#x202F; 07 59 58 46 01</i>
               </a>
             </address>
           </Col>
